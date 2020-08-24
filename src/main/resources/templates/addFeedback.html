@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Feedback</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <form action="#" th:action="@{/feedback/save}"
+          th:object="${feedback}" method="POST">
+
+        <!-- need to associate this data with customer id
+        NE BI RADILO DA NISAM SAKRIO VREDNOST id-ja DA BIH GA POSLE DOHVATIO U KONTROLERU
+        INACE MI JE U KONTROLERU ZA UPDATE VRACAO 0 BEZ OVE ZASTEKANE VREDNOSTI id-ja
+        STO ZNACI DA AKO JE 0 ON NECE UPDATEOVATI NEGO SACUVATI NOVOG U BAZI -->
+        <input type="hidden" th:field="*{id}" />
+
+        <!-- * oznacava property objekta koji smo definisali u form tagu "employee"-njega smo upakovali u model u kontroleru kada smo slali na ovu stranicu -->
+        <input type="text" th:field="*{subject}" class="form-control mb-4 col-4" placeholder="Subject">
+        <input type="text" th:field="*{message}" class="form-control mb-4 col-4" placeholder="Message">
+        <input type="text" th:field="*{name}" class="form-control mb-4 col-4" placeholder="Name">
+        <input type="text" th:field="*{contactNumber}" class="form-control mb-4 col-4" placeholder="Contact Number">
+        <input type="text" th:field="*{email}" class="form-control mb-4 col-4" placeholder="Email">
+        <input type="text" th:field="*{receivedDate}" class="form-control mb-4 col-4" placeholder="Received Date">
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{../feedback/managersListCrudFeedbacks}" class="btn btn-primary">Back to List of Feedbacks</a>
+
+</body>
+</html>

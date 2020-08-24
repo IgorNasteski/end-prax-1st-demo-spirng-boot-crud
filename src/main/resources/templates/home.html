@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+
+    <h1>HOME</h1>
+
+    <h2>Recenica ubacena iz messages.properties fajla(to je defaultni fajl za poruke</h2>
+    <p th:text="#{poruka.random}"></p>
+
+    <div><h3>Authenticated username:</h3>
+        <h2 sec:authentication="name"></h2>
+    </div>
+    <div sec:authentication="principal.authorities"></div>
+    <div sec:authorize="isAuthenticated()">
+        Text visible only to authenticated users.
+    </div>
+
+
+
+
+    <div sec:authorize="hasRole('EMPLOYEE')">
+        <p>Text visible to EMPLOYEE EVERYONE??.</p>
+    </div>
+
+    <div sec:authorize="hasRole('ADMIN')">
+        <p>Text visible to admin.</p>	<br>
+        <a th:href="@{users/admins}" class="btn btn-primary">ADMIN ONLY</a>        <br><br>
+    </div>
+
+    <br><br>
+
+    <div sec:authorize="hasRole('MANAGER')">
+        <p>Text visible to MANAGER.	<br></p>
+        <a th:href="@{users/managers}" class="btn btn-primary">MANAGER ONLY</a>        <br><br>
+    </div>
+
+
+
+
+    <!-- TESTIRAM RESTRIKCIJU PRISTUPA PO ROLAMA
+    NAMERNO NISAM STAVIO IZMEDJU TAGOVA ZA SVE ROLE, NEGO JAVNO DA SVI VIDE NA STRANICI, KAKO BIH TESTIRAO
+    DA LI NPR ADMIN MOZE DA UDJE NA PUTANJU ZA MENADZERA ITD-->
+    <a th:href="@{users/managers}" class="btn btn-primary">Only for managers</a>
+    <a th:href="@{users/admins}" class="btn btn-primary">Only for admins</a>
+
+
+
+
+
+    <!-- LOGOUT -->
+    <!-- Add a logout button MORA BITI U OBLIKU form:form JER TAKO MORA DA BIH SUBMITOVAO I DA BI ME POSLAO NA NPR LOGIN STRANICU -->
+    <!-- <a href="#" th:href="@{/logout}">Log Out</a> -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="LOGOUT" class="btn btn-info"></input>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Customer</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <form action="#" th:action="@{/customers/save}"
+          th:object="${customer}" method="POST">
+
+        <!-- need to associate this data with customer id
+        NE BI RADILO DA NISAM SAKRIO VREDNOST id-ja DA BIH GA POSLE DOHVATIO U KONTROLERU
+        INACE MI JE U KONTROLERU ZA UPDATE VRACAO 0 BEZ OVE ZASTEKANE VREDNOSTI id-ja
+        STO ZNACI DA AKO JE 0 ON NECE UPDATEOVATI NEGO SACUVATI NOVOG U BAZI -->
+        <input type="hidden" th:field="*{customerId}" />
+
+        <!-- * oznacava property objekta koji smo definisali u form tagu "employee"-njega smo upakovali u model u kontroleru kada smo slali na ovu stranicu -->
+        <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First name">
+        <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last name">
+        <input type="text" th:field="*{phone}" class="form-control mb-4 col-4" placeholder="phone">
+        <input type="text" th:field="*{email}" class="form-control mb-4 col-4" placeholder="email">
+        <input type="text" th:field="*{street}" class="form-control mb-4 col-4" placeholder="street">
+        <input type="text" th:field="*{city}" class="form-control mb-4 col-4" placeholder="city">
+        <input type="text" th:field="*{state}" class="form-control mb-4 col-4" placeholder="state">
+        <input type="text" th:field="*{zipCode}" class="form-control mb-4 col-4" placeholder="zip code">
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{../customers/adminsListCrudCustomers}" class="btn btn-primary">Back to Customers List</a>
+
+</body>
+</html>

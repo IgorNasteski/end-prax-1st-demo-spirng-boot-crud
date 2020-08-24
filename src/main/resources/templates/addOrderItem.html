@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Item Order</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <form action="#" th:action="@{/items/save}"
+          th:object="${item}" method="POST">
+
+        <!-- need to associate this data with customer id
+        NE BI RADILO DA NISAM SAKRIO VREDNOST id-ja DA BIH GA POSLE DOHVATIO U KONTROLERU
+        INACE MI JE U KONTROLERU ZA UPDATE VRACAO 0 BEZ OVE ZASTEKANE VREDNOSTI id-ja
+        STO ZNACI DA AKO JE 0 ON NECE UPDATEOVATI NEGO SACUVATI NOVOG U BAZI -->
+        <input type="hidden" th:field="*{itemId}" />
+
+        <!-- * oznacava property objekta koji smo definisali u form tagu "employee"-njega smo upakovali u model u kontroleru kada smo slali na ovu stranicu -->
+            <!-- itemId NE MORA JER JE SVAKAKO AUTOINCREMENT, SVAKAKO CE SE PRI ADDOVANJU
+             NOVOG ON KREIRATI SAM TJ POVECATI ZA JEDAN NEGO STO JE BIO U TABELI U BAZI-->
+        <!--<input type="text" th:field="*{itemId}" class="form-control mb-4 col-4" placeholder="Item ID">-->
+        <input type="text" th:field="*{productId}" class="form-control mb-4 col-4" placeholder="ProductId">
+        <input type="text" th:field="*{quantity}" class="form-control mb-4 col-4" placeholder="Quantity">
+        <input type="text" th:field="*{listPrice}" class="form-control mb-4 col-4" placeholder="List Price">
+        <input type="text" th:field="*{discount}" class="form-control mb-4 col-4" placeholder="Discount">
+
+        <!--<input type="text" th:field="*{listOfOrders.1-=}" class="form-control mb-4 col-4" placeholder="Order ID">
+        <input type="text" th:field="*{listOfOrders.customer.customerId}" class="form-control mb-4 col-4" placeholder="Customer ID">
+-->
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{../items/adminsListOfOrdersItems}" class="btn btn-primary">Back to Orders List</a>
+
+</body>
+</html>
